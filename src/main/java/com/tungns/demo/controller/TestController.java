@@ -18,7 +18,11 @@ public class TestController {
         System.out.println(request.getRemoteAddr());
         Cookie cookie= new Cookie("userName", "TungNguyen");
         response.addCookie(cookie);
-        Arrays.stream(request.getCookies()).toList().stream().map(Cookie::getValue).forEach(System.out::println);
+//        Arrays.stream(request.getCookies()).toList().stream().map(Cookie::getValue).forEach(System.out::println);
+        Arrays.stream(request.getCookies()).toList().forEach(item -> {
+            System.out.println(item.getValue());
+        });
         return "pong";
+
     }
 }
