@@ -1,8 +1,6 @@
 package com.tungns.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,17 +10,13 @@ import java.util.Arrays;
 @RestController
 @RequestMapping(value = "ping")
 public class TestController {
-    @GetMapping
-    public String ping(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("pong");
-        System.out.println(request.getRemoteAddr());
-        Cookie cookie= new Cookie("userName", "TungNguyen");
-        response.addCookie(cookie);
-//        Arrays.stream(request.getCookies()).toList().stream().map(Cookie::getValue).forEach(System.out::println);
-        Arrays.stream(request.getCookies()).forEach(item -> {
-            System.out.println(item.getValue());
-        });
-        return "pong";
 
+    @GetMapping(value = "tracking/{id}")
+    public String ping(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+        System.out.println("pong from id " + id);
+        System.out.println(request.getRemoteAddr());
+        System.out.println(request.getHeader("User-Agent"));
+        response.addCookie(new Cookie("cookieName", "TungNguyen"));
+        return "pong";
     }
 }
