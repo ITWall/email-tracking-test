@@ -11,11 +11,11 @@ import java.util.Arrays;
 @RequestMapping(value = "ping")
 public class TestController {
 
-    @GetMapping(value = "tracking/{id}")
+    @GetMapping(value = "{id}")
     public String ping(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
         System.out.println("pong from id " + id);
         System.out.println(request.getRemoteAddr());
-        System.out.println(request.getHeader("User-Agent"));
+//        System.out.println(request.getHeader("User-Agent"));
         response.addCookie(new Cookie("cookieName", "TungNguyen"));
         return "pong";
     }
